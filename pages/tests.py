@@ -1,5 +1,5 @@
-from django.test import TestCase
-from django.test import reverse #ne2
+from django.test import SimpleTestCase
+from django.urls import reverse #ne2
 
 class SimpleTests(SimpleTestCase):
     def test_home_page_status_code(self):
@@ -13,15 +13,15 @@ class SimpleTests(SimpleTestCase):
 class HomepageTests(SimpleTestCase):
     def test_url_exists_at_correct_location(self):
         response = self.client.get('/')
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_url_available_by_name(self):
         response = self.client.get(reverse("home"))
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_template_name_correct(self):
         response = self.client.get(reverse("home"))
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_template_content(self):
         response = self.client.get(reverse("home"))
@@ -30,16 +30,16 @@ class HomepageTests(SimpleTestCase):
 class AboutpageTests(SimpleTestCase):
     def test_url_exists_at_correct_location(self):
         response = self.client.get('/about/')
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_url_available_by_name(self):
         response = self.client.get(reverse("about"))
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_template_name_correct(self):
         response = self.client.get(reverse("about"))
-        self.assertEqual(response, status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_template_content(self):
         response = self.client.get(reverse("about"))
-        self.assertContains(response, "<h1>Homepage</h1>")
+        self.assertContains(response, "<h1>About page</h1>")
